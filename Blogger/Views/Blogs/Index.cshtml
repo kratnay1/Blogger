@@ -1,0 +1,25 @@
+﻿@using Blogger.Models
+@model BlogsListingViewModel
+
+<p>Click on a blog name to view the posts in the blog.</p>
+<table border="1">
+    <tr>
+        <td>Blog:</td>
+        <td>Posts</td>
+        <td>Created Date</td>
+    </tr>
+    @foreach (BlogsListingViewModel.BlogItem blog in Model.Blogs)
+    {
+        <tr>
+            <td>
+                <a href="/Blogs/View/@blog.BlogId">@blog.BlogTitle</a>
+            </td>
+            <td>
+                @blog.PostCount
+            </td>
+            <td>
+                @blog.CreatedDate.ToString("MM/dd/yyyy")
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,52 @@
+﻿@using Blogger.Models
+@model PostListingViewModel
+
+<p>Click on a post view comments or post a comment.</p>
+<table border="1">
+    <tr>
+        <td>Post Title:</td>
+        <td>Message Content:</td>
+        <td>Comments</td>
+        <td>Created Date</td>
+    </tr>
+    @foreach (PostListingViewModel.PostItem post in Model.Posts)
+    {
+        <tr>
+            <td>
+                <a href="/posts/@post.PostId">@post.PostTitle</a>
+            </td>
+            <td>
+                @post.MessageContent
+            </td>
+            <td>
+                @post.CommentCount
+            </td>
+            <td>
+                @post.CreatedDate.ToString("MM/dd/yyyy")
+            </td>
+        </tr>
+    }
+</table>
+
+<br/>
+@using (Html.BeginForm())
+{
+    <table border="1">
+        <tr>
+            <td colspan="2">Post new Blog post:</td>
+        </tr>
+        <tr>
+            <td>Title:</td>
+            <td><input type="text" name="PostTitle" /></td>
+        </tr>
+        <tr>
+            <td>Message:</td>
+            <td>
+                <textarea name="MessageContent"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Post Blog Post"></td>
+        </tr>
+    </table>
+}

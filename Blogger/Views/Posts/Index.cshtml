@@ -1,0 +1,56 @@
+﻿@using Blogger.Models
+@model PostViewModel
+<br/>
+<table border="1">
+    <tr>
+        <td>@Model.PostTitle</td>
+    </tr>
+    <tr>
+        <td>@Model.MessageContent</td>
+    </tr>
+    <tr>
+        <td>Posted on @Model.CreatedDate.ToString("MM/dd/yyyy")</td>
+    </tr>
+</table>
+<br/>
+<p>Comments:</p>
+
+@foreach (PostViewModel.Comment comment in Model.Comments)
+{
+    <table border="1">
+        <tr>
+            <td>@comment.Username posted on @comment.CreatedDate.ToString("MM/dd/yyyy"):</td>
+        </tr>
+        <tr>
+            <td>@comment.MessageContent</td>
+        </tr>
+    </table><br/>
+}
+@if (Model.Comments.Count == 0)
+{
+    <div>There are no comments posted for this blog post yet.</div>
+}
+
+<br/>
+
+@using (Html.BeginForm())
+{
+    <table border="1">
+        <tr>
+            <td colspan="2">Post new comment:</td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" name="Username" /></td>
+        </tr>
+        <tr>
+            <td>Message:</td>
+            <td>
+                <textarea name="MessageContent"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Post Comment"></td>
+        </tr>
+    </table>
+}
